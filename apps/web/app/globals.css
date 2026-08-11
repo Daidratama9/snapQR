@@ -1,0 +1,16 @@
+:root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; background: #f5f7fb; color: #172033; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.card { width: min(100%, 440px); border: 1px solid #dfe5f0; border-radius: 16px; background: #fff; padding: 32px; box-shadow: 0 16px 48px rgba(22, 32, 51, .08); }
+.brand { color: #315eea; font-weight: 800; letter-spacing: .12em; font-size: 14px; }
+h1 { margin: 12px 0 8px; font-size: 28px; }
+p { color: #60708a; line-height: 1.5; }
+form { display: grid; gap: 16px; margin-top: 28px; }
+label { display: grid; gap: 7px; font-weight: 600; font-size: 14px; }
+input { width: 100%; border: 1px solid #c9d3e4; border-radius: 8px; padding: 12px; font: inherit; }
+button { border: 0; border-radius: 8px; background: #315eea; color: #fff; cursor: pointer; font: inherit; font-weight: 700; padding: 12px; }
+button:disabled { opacity: .65; cursor: wait; }
+.error { margin: 0; color: #b42318; font-size: 14px; }
+.success { margin: 0; color: #067647; font-size: 14px; }
+a { color: #315eea; font-weight: 600; }

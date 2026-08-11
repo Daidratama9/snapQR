@@ -1,0 +1,17 @@
+{
+  "name": "snapqr",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @snapqr/web --filter @snapqr/api dev",
+    "build": "pnpm --filter @snapqr/web build && pnpm --filter @snapqr/api build",
+    "lint": "pnpm --filter @snapqr/web lint && pnpm --filter @snapqr/api lint",
+    "test": "pnpm --filter @snapqr/api test",
+    "db:generate": "pnpm --filter @snapqr/database prisma:generate",
+    "db:migrate": "pnpm --filter @snapqr/database prisma:migrate"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
