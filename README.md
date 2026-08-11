@@ -1,0 +1,3 @@
+# SnapQR
+
+Repository initialization.
