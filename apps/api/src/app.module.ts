@@ -5,6 +5,7 @@ import Joi from "joi";
 import { AuthModule } from "./auth/auth.module";
 import { HealthController } from "./health.controller";
 import { PrismaService } from "./prisma.service";
+import { OrganizationsModule } from "./organizations/organizations.module";
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PrismaService } from "./prisma.service";
     }),
     ThrottlerModule.forRoot([{ ttl: 60_000, limit: 20 }]),
     AuthModule,
+    OrganizationsModule,
   ],
   controllers: [HealthController],
   providers: [PrismaService],

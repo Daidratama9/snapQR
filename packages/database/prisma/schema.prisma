@@ -15,8 +15,54 @@ model User {
   createdAt    DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt    DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
   sessions     RefreshSession[]
+  memberships  OrganizationMember[]
 
   @@map("users")
+}
+
+model Organization {
+  id          String               @id @default(uuid()) @db.Uuid
+  name        String               @db.VarChar(120)
+  slug        String               @unique @db.VarChar(80)
+  createdAt   DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime             @updatedAt @map("updated_at") @db.Timestamptz(6)
+  members     OrganizationMember[]
+  events      Event[]
+
+  @@map("organizations")
+}
+
+model OrganizationMember {
+  id             String             @id @default(uuid()) @db.Uuid
+  organizationId String             @map("organization_id") @db.Uuid
+  userId         String             @map("user_id") @db.Uuid
+  role           OrganizationRole   @default(OWNER)
+  createdAt      DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@map("organization_members")
+}
+
+model Event {
+  id              String       @id @default(uuid()) @db.Uuid
+  organizationId  String       @map("organization_id") @db.Uuid
+  name            String       @db.VarChar(160)
+  eventType       String       @default("GENERAL") @map("event_type") @db.VarChar(40)
+  startsAt        DateTime     @map("starts_at") @db.Timestamptz(6)
+  timezone        String       @default("Asia/Jakarta") @db.VarChar(80)
+  location        String?      @db.VarChar(240)
+  retentionDays   Int          @default(60) @map("retention_days")
+  status          EventStatus  @default(DRAFT)
+  createdAt       DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
+  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, status])
+  @@index([organizationId, startsAt])
+  @@map("events")
 }
 
 model RefreshSession {
@@ -36,4 +82,17 @@ model RefreshSession {
 enum UserStatus {
   ACTIVE
   DISABLED
+}
+
+enum OrganizationRole {
+  OWNER
+  ADMIN
+  OPERATOR
+}
+
+enum EventStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  ARCHIVED
 }
