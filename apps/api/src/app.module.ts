@@ -6,6 +6,7 @@ import { AuthModule } from "./auth/auth.module";
 import { HealthController } from "./health.controller";
 import { PrismaService } from "./prisma.service";
 import { OrganizationsModule } from "./organizations/organizations.module";
+import { ParticipantsModule } from "./participants/participants.module";
 
 @Module({
   imports: [
@@ -20,11 +21,13 @@ import { OrganizationsModule } from "./organizations/organizations.module";
         JWT_REFRESH_SECRET: Joi.string().min(32).required(),
         ACCESS_TOKEN_TTL: Joi.string().default("15m"),
         REFRESH_TOKEN_TTL: Joi.string().default("7d"),
+        PUBLIC_APP_URL: Joi.string().uri().default("http://localhost:3000"),
       }),
     }),
     ThrottlerModule.forRoot([{ ttl: 60_000, limit: 20 }]),
     AuthModule,
     OrganizationsModule,
+    ParticipantsModule,
   ],
   controllers: [HealthController],
   providers: [PrismaService],

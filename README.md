@@ -1,6 +1,6 @@
 # SnapQR
 
-SnapQR is the foundation for a B2B event-photography platform. This first phase contains only the application, database, and staff authentication foundations. Event operations, participants, QR/BIB handling, photos, matching, galleries, AI, and social integrations are deliberately out of scope.
+SnapQR is a B2B event-photography platform. The current foundation includes staff authentication, organizations, event setup, and participant/BIB/QR identity management. Photo handling, matching, galleries, AI, and social integrations are deliberately out of scope.
 
 ## Stack
 
@@ -32,6 +32,13 @@ SnapQR is the foundation for a B2B event-photography platform. This first phase 
 - Short-lived access token plus a rotated, hashed refresh-session cookie
 - Login throttling and request validation
 - Sign-out revokes the active refresh session
+
+## Current operations foundation
+
+- Organizations have a staff owner and role-scoped access.
+- Events belong to exactly one organization and follow `DRAFT → ACTIVE → COMPLETED → ARCHIVED`.
+- A participant's BIB is unique within an event, but may repeat across events.
+- QR tokens are generated from cryptographically secure random data; regenerating a QR revokes the previous active token.
 
 For a production environment, set secrets through the hosting platform rather than committing `.env`, use HTTPS, and set `NODE_ENV=production` so authentication cookies are secure.
 
