@@ -7,6 +7,7 @@ import { HealthController } from "./health.controller";
 import { PrismaService } from "./prisma.service";
 import { OrganizationsModule } from "./organizations/organizations.module";
 import { ParticipantsModule } from "./participants/participants.module";
+import { PhotographersModule } from "./photographers/photographers.module";
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ParticipantsModule } from "./participants/participants.module";
     AuthModule,
     OrganizationsModule,
     ParticipantsModule,
+    PhotographersModule,
   ],
   controllers: [HealthController],
   providers: [PrismaService],

@@ -1,6 +1,6 @@
 # SnapQR
 
-SnapQR is a B2B event-photography platform. The current foundation includes staff authentication, organizations, event setup, and participant/BIB/QR identity management. Photo handling, matching, galleries, AI, and social integrations are deliberately out of scope.
+SnapQR is a B2B event-photography platform. The current foundation includes staff authentication, organizations, event setup, participant/BIB/QR identity management, and photographer assignment. Photo handling, matching, galleries, AI, and social integrations are deliberately out of scope.
 
 ## Stack
 
